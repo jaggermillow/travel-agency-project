@@ -1,0 +1,9 @@
+flask
+flask_sqlalchemy
+flask_login
+flask_wtf
+pandas
+openpyxl
+python-dotenv
+werkzeug
+pytest

@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="max-w-2xl mx-auto bg-white p-6 rounded shadow">
+  <h2 class="text-lg font-semibold mb-4">Add Reservation</h2>
+  <form method="post">
+    {{ form.hidden_tag() }}
+    <div class="grid grid-cols-2 gap-4">
+      <div>
+        {{ form.tour_option.label }}
+        {{ form.tour_option(class_='mt-1 block w-full border rounded p-2') }}
+      </div>
+      <div>
+        {{ form.date.label }}
+        {{ form.date(class_='mt-1 block w-full border rounded p-2') }}
+      </div>
+      <div>
+        {{ form.hotel.label }}
+        {{ form.hotel(class_='mt-1 block w-full border rounded p-2') }}
+      </div>
+      <div>
+        {{ form.room_number.label }}
+        {{ form.room_number(class_='mt-1 block w-full border rounded p-2') }}
+      </div>
+      <div class="col-span-2">
+        {{ form.customer_name.label }}
+        {{ form.customer_name(class_='mt-1 block w-full border rounded p-2') }}
+      </div>
+      <div>
+        {{ form.pax.label }}
+        {{ form.pax(class_='mt-1 block w-full border rounded p-2') }}
+      </div>
+      <div>
+        {{ form.contact.label }}
+        {{ form.contact(class_='mt-1 block w-full border rounded p-2') }}
+      </div>
+      <div>
+        {{ form.amount.label }}
+        {{ form.amount(class_='mt-1 block w-full border rounded p-2') }}
+      </div>
+      <div>
+        {{ form.paid_amount.label }}
+        {{ form.paid_amount(class_='mt-1 block w-full border rounded p-2') }}
+      </div>
+      <div>
+        {{ form.payment_status.label }}
+        {{ form.payment_status(class_='mt-1 block w-full border rounded p-2') }}
+      </div>
+      <div>
+        {{ form.payment_method.label }}
+        {{ form.payment_method(class_='mt-1 block w-full border rounded p-2') }}
+      </div>
+    </div>
+    <div class="text-right mt-4">
+      {{ form.submit(class_='bg-green-600 text-white px-4 py-2 rounded') }}
+    </div>
+  </form>
+</div>
+{% endblock %}

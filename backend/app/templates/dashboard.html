@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="flex items-center justify-between mb-6">
+  <form method="get" class="flex gap-2">
+    <input name="q" placeholder="Search by customer, hotel, tour" value="{{ request.args.get('q','') }}"
+      class="border rounded p-2" />
+    <button class="bg-gray-800 text-white px-3 py-2 rounded">Search</button>
+  </form>
+  <div class="flex gap-2">
+    <a href="{{ url_for('main.add_reservation') }}" class="bg-green-600 text-white px-3 py-2 rounded">Add
+      Reservation</a>
+    <form method="post" action="{{ url_for('main.export') }}" class="flex items-center gap-2">
+      {{ export_form.hidden_tag() }}
+      {{ export_form.year(class_='border rounded p-2') }}
+      {{ export_form.month(class_='border rounded p-2') }}
+      {{ export_form.submit(class_='bg-blue-600 text-white px-3 py-2 rounded') }}
+    </form>
+  </div>
+</div>
+
+<div class="bg-white rounded shadow overflow-auto">
+  <table class="min-w-full table-auto">
+    <thead class="bg-gray-50">
+      <tr>
+        <th class="px-4 py-2 text-left">Date</th>
+        <th class="px-4 py-2 text-left">Tour</th>
+        <th class="px-4 py-2 text-left">Hotel / Room</th>
+        <th class="px-4 py-2 text-left">Customer</th>
+        <th class="px-4 py-2 text-left">PAX</th>
+        <th class="px-4 py-2 text-left">Amount</th>
+        <th class="px-4 py-2 text-left">Paid</th>
+        <th class="px-4 py-2 text-left">Payment</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for r in reservations %}
+      <tr class="border-t">
+        <td class="px-4 py-2">{{ r.date.strftime('%Y-%m-%d') }}</td>
+        <td class="px-4 py-2">{{ r.tour_option }}</td>
+        <td class="px-4 py-2">{{ r.hotel }} / {{ r.room_number }}</td>
+        <td class="px-4 py-2">{{ r.customer_name }}<br><small>{{ r.contact }}</small></td>
+        <td class="px-4 py-2">{{ r.pax or '' }}</td>
+        <td class="px-4 py-2">{{ r.amount or '' }}</td>
+        <td class="px-4 py-2">{{ r.paid_amount or '' }}</td>
+        <td class="px-4 py-2">{{ r.payment_status }} ({{ r.payment_method }})</td>
+      </tr>
+      {% else %}
+      <tr>
+        <td class="p-4" colspan="9">No reservations found</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}
